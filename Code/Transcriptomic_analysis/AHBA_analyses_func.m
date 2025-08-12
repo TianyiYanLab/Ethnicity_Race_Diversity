@@ -8,8 +8,7 @@
 nregs=400; % number of regions
 
 % AHBA data, output of abagen.ipynb; Predictors
-X = readtable(['D:\OneDrive\GraduateStudent_Phd1\4_Population_differences_BrainParcellation\' ...
-    'Population_differences_BrainParcellation\8_MSN_GLM_2groups_2nd\AHBA\' ...
+X = readtable(['D:\OneDrive\8_MSN_GLM_2groups_2nd\AHBA\' ...
     'AHBA_expression_data.csv'],'VariableNamingRule','preserve');   % Predictors
 geneData = X(:, 2:end);
 geneMatrix = table2array(geneData);
@@ -17,8 +16,7 @@ columnNames  =  X.Properties.VariableNames;
 geneNames  =  columnNames(2:end);   %Gene names
 
 %Predictive weights; Response variable
-weight_dir =(['D:\OneDrive\GraduateStudent_Phd1\4_Population_differences_BrainParcellation\Population_differences_BrainParcellation\' ...
-    '7_KRR_2groups\AA_WA_2nd\output\Haufe_weights_v3']) ;
+weight_dir =(['D:\OneDrive\7_KRR_2groups\AA_WA_2nd\output\Haufe_weights_v3']) ;
 weight=load([weight_dir '\weights_full_cov_X_MEAN.mat']);
 Y = weight.cov_avg; 
 

@@ -8,7 +8,7 @@ Repository of our latest manuscript, 'Lifestyle and transcriptional signatures l
 
 ### Main codes
 
-1. The procedure for defining individualized cortical parcellations at the 400-region level closely follows the MSHBM manual (<https://github.com/ThomasYeoLab/CBIG/tree/e629fa17180f1e02cb507e1d852ea7a1aaf23544/stable\_projects/brain\_parcellation/Kong2022\_ArealMSHBM>);
+1. The procedure for defining individualized cortical parcellations at the 400-region level closely follows the MSHBM manual ([https://github.com/ThomasYeoLab/CBIG/tree/e629fa17180f1e02cb507e1d852ea7a1aaf23544/stable\_projects/brain\_parcellation/Kong2022\_ArealMSHBM](https://github.com/ThomasYeoLab/CBIG/tree/e629fa17180f1e02cb507e1d852ea7a1aaf23544/stable_projects/brain_parcellation/Kong2022_ArealMSHBM));
 2. Codes in the "Split\_match" folder are used to split the African Americans(AA) into 5 folds and match white Americans (WA) with AA within each fold on the basis of age, sex and root-mean-square framewise displacement (RMS);
 3. Codes in the "KRR\_group\_prediction" folder are used to perform resting-state functional connectivity (RSFC) -based ethnicity/race group prediction;
 4. Codes in the "Morphometric\_similarity\_analysis" folder are used to evaluate ethnicity/race-related variations in cortical morphometry;

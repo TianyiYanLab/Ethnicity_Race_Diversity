@@ -16,7 +16,7 @@ columnNames  =  X.Properties.VariableNames;
 geneNames  =  columnNames(2:end);   %Gene names
 
 %Predictive weights; Response variable
-weight_dir =(['D:\OneDrive\7_KRR_2groups\AA_WA_2nd\output\Haufe_weights_v3']) ;
+weight_dir =(['D:\OneDrive\Haufe_weights_v3']) ;
 weight=load([weight_dir '\weights_full_cov_X_MEAN.mat']);
 Y = weight.cov_avg; 
 

@@ -74,7 +74,7 @@ else
 end
 
 %% read demographics and behavioral scores
-[subjects, nsub] = CBIG_text2cell(full_subj_ls);
+[subjects, ~] = CBIG_text2cell(full_subj_ls);
 subjects = subjects';
 
 if(~strcmpi(bhvr_ls_rstr, 'none'))
@@ -168,7 +168,7 @@ for seed = 1:num_seeds
             cost_mat(:,:,weigh_idx) = cost_mat(:,:,weigh_idx) .*2;
             cost_mat = sum(abs(cost_mat), 3);
             
-            [assign, cost] = munkres(cost_mat);
+            [assign, ~] = munkres(cost_mat);
             
             all_mAA{b} = [all_mAA{b}; curr_m(Aind, :)];
             all_mWA{b} = [all_mWA{b}; curr_m(Wind(assign), :)];

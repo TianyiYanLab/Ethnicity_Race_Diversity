@@ -106,7 +106,7 @@ if(~strcmpi(bhvr_rstr, 'none'))
 else
     bhvr_rstr_val = [];
 end
-[sex, bhvr_unrstr_val] = CBIG_parse_delimited_txtfile(unrestricted_csv, {'Gender'}, ...
+[sex, ~] = CBIG_parse_delimited_txtfile(unrestricted_csv, {'Gender'}, ...
     bhvr_unrstr, 'Subject', subjects, ',');
 
 sex = strcmp(sex, 'M');
@@ -168,15 +168,7 @@ for b = b_start:nbehav
 %             metric = [metric sex];
         case 'FD'
             metric = [metric FD];
-%         case 'educ'
-%             metric = [metric age_Educ(:,2)];
-%             weigh_idx = [weigh_idx mv]
 
-%         case 'DVARS'
-%             metric = [metric DV];
-%         case 'ICV'
-%             metric = [metric ICV];
-%             weigh_idx = [weigh_idx mv]
         otherwise
             error('Unknown matched variable.')
         end

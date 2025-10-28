@@ -42,5 +42,5 @@ for n = 1:length(seeds_final)
         'metric','num_inner_folds','outdir','outstem','threshold_set', ...
         'with_bias','y','covariates','cov_X');
     cd(outdir)
-    features([outdir '/seed' num2str(seed) '_setup_file.mat'],0);
+    CBIG_KRR_workflow([outdir '/seed' num2str(seed) '_setup_file.mat'],0);
 end

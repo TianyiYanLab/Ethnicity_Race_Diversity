@@ -17,6 +17,8 @@ Repository of our latest manuscript, 'Lifestyle and transcriptional signatures l
 7. Codes in the "Interaction\_effect\_analysis" folder are used to perform interaction effects modelling for figure 3 in the manuscript;
 8. Codes in the "Transcriptomic\_analysis" folder utilizes data from the Allen Human Brain Atlas (AHBA) to conduct transcriptome–neuroimaging association analyses.
 
+* Codes in the "Fullly\_Neual\_Network" folder constructs a fully neural network to perform group prediction (for reviewer evaluation).
+
 
 
 ## Contact Information

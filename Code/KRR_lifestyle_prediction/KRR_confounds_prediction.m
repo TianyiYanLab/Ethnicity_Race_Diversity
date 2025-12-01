@@ -3,8 +3,10 @@ function KRR_confounds_prediction(allsubls,type,outdir_ori,workdir,seeds_num,num
 
     for n = 1:seeds_num
         seed =  n; 
+        
         %param.sub_fold
-        load([workdir '/seed' num2str(seed) '/no_relative_15_fold_sub_list.mat']); %% output of function 'CBIG_cross_validation_data_split'
+        load([workdir '/seed' num2str(seed) '/no_relative_5_fold_sub_list.mat']); %% output of function 'CBIG_cross_validation_data_split'
+        
         %param.feature_mat
         switch type
                case 'FC_indi'
@@ -13,6 +15,7 @@ function KRR_confounds_prediction(allsubls,type,outdir_ori,workdir,seeds_num,num
                otherwise
                      error('Invalid input value');
         end
+        
         %param.ker_param
         load([workdir '/ker_param.mat'])
         %param.lambda_set
@@ -30,12 +33,14 @@ function KRR_confounds_prediction(allsubls,type,outdir_ori,workdir,seeds_num,num
                otherwise
                     error('Invalid input value');
         end
+        
         %param.outstem
         load([workdir '/outstem.mat'])
         %param.threshold_set
         threshold_set=[];
         %param.with_bias
         with_bias=1;
+        
         %param.cov_X
         cov_X = extract_cov_X(allsub,aseg_HCP,'/home/user7/aData/HCP/restricted_S1200.csv');
         %param.covariates
@@ -80,14 +85,12 @@ end
 
 function Y = Y_Extraction(allsub_ls,unrestricted_csv,restricted_csv)
     
-    %% Sleep:PSQI_Score PSQI_Comp1 PSQI_Comp2 PSQI_Comp3 PSQI_Comp4 PSQI_Comp5
-    % PSQI_Comp6 PSQI_Comp7
+    %% Sleep:PSQI_Score
     
     % Reference:The interrelation of sleep and mental and physical health is 
     % anchored in grey-matter neuroanatomy and under genetic control
-    [~, psqi] = CBIG_parse_delimited_txtfile(unrestricted_csv, {'Gender',}, ...
+    [~, Psqi] = CBIG_parse_delimited_txtfile(unrestricted_csv, {'Gender',}, ...
         {'PSQI_Score',},'Subject', CBIG_text2cell(allsub_ls), ',');
-    psqi_z  = zscore(psqi);
     
         
     %% Substance Use
@@ -110,32 +113,29 @@ function Y = Y_Extraction(allsub_ls,unrestricted_csv,restricted_csv)
         Substance_use(nan_indices, i) = column_means(i);
     end
     
-    Substance_use_z = zscore(Substance_use);
-    Substance_use_avg = mean(Substance_use_z,2);
+    Substance_use_avg = mean(Substance_use,2);
     
     %% Physical Activity
     [~, PA] = CBIG_parse_delimited_txtfile(unrestricted_csv, {'Gender',}, ...
         {'Endurance_Unadj', 'GaitSpeed_Comp', 'Dexterity_Unadj', 'Strength_Unadj'}, ...
         'Subject', CBIG_text2cell(allsub_ls), ',');
-    PA_z =  zscore(PA);
-    PA_avg  = mean(PA_z,2);
+    PA_avg  = mean(PA,2);
     
     %% Social Relationships
     % Reference: HCP Manual
       [~, Social] = CBIG_parse_delimited_txtfile(unrestricted_csv, {'Gender',}, ...
         {'Friendship_Unadj', 'Loneliness_Unadj', 'PercHostil_Unadj', 'PercReject_Unadj','EmotSupp_Unadj','InstruSupp_Unadj'}, ...
         'Subject', CBIG_text2cell(allsub_ls), ',');
-       Social_z = zscore(Social);
     
     % adjust the sign
-        Social_z(:,2) = -Social_z(:,2); % Loneliness
-        Social_z(:,3) = -Social_z(:,3); % Perceived Hostility
-        Social_z(:,4) = -Social_z(:,4); % Perceived Rejection
-        Social_Score = mean(Social_z, 2); % mean value
+        Social(:,2) = -Social(:,2); % Loneliness
+        Social(:,3) = -Social(:,3); % Perceived Hostility
+        Social(:,4) = -Social(:,4); % Perceived Rejection
+        Social_Score = mean(Social, 2); % mean value
       
       
       confounders= {'Sleep','Substance Use','Physical Activity','Social Relationships'};        
-      Y = [psqi_z Substance_use_avg PA_avg Social_Score Personality_avg MentalHealth_avg];
+      Y = [Psqi Substance_use_avg PA_avg Social_Score];
 
 end
 

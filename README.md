@@ -13,8 +13,8 @@ Repository of our latest manuscript, 'Lifestyle and transcriptional signatures l
 3. Codes in the "KRR\_group\_prediction" folder are used to perform resting-state functional connectivity (RSFC) -based ethnicity/race group prediction;
 4. Codes in the "Morphometric\_similarity\_analysis" folder are used to evaluate ethnicity/race-related variations in cortical morphometry;
 5. Codes in the "KRR\_lifestyle\_prediction" folder are used to construct RSFC-based lifestyle factor prediction models;
-6. Codes in the "SEM" folder are used to conduct structural equation models for figure 4 in the manuscript;
-7. Codes in the "Interaction\_effect\_analysis" folder are used to perform interaction effects modelling for figure 4 in the manuscript;
+6. Codes in the "SEM" folder are used to conduct structural equation models for figure 3 in the manuscript;
+7. Codes in the "Interaction\_effect\_analysis" folder are used to perform interaction effects modelling for figure 3 in the manuscript;
 8. Codes in the "Transcriptomic\_analysis" folder utilizes data from the Allen Human Brain Atlas (AHBA) to conduct transcriptome–neuroimaging association analyses.
 
 

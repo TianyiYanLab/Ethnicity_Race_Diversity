@@ -9,7 +9,7 @@ nregs=400; % number of regions
 
 % AHBA data, output of abagen.ipynb; Predictors
 X = readtable(['D:\OneDrive\8_MSN_GLM_2groups_2nd\AHBA\' ...
-    'AHBA_expression_data.csv'],'VariableNamingRule','preserve');   % Predictors
+    'AHBA_expression_data_ds01.csv'],'VariableNamingRule','preserve');   % Predictors
 geneData = X(:, 2:end);
 geneMatrix = table2array(geneData);
 columnNames  =  X.Properties.VariableNames;

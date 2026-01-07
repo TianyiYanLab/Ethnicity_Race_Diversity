@@ -8,15 +8,19 @@
 nregs=400; % number of regions
 
 % AHBA data, output of abagen.ipynb; Predictors
-X = readtable(['D:\OneDrive\8_MSN_GLM_2groups_2nd\AHBA\' ...
+X = readtable(['D:\OneDrive\GraduateStudent_Phd1\AHBA\majorRe\' ...
     'AHBA_expression_data_ds01.csv'],'VariableNamingRule','preserve');   % Predictors
 geneData = X(:, 2:end);
 geneMatrix = table2array(geneData);
+nanCols = find(any(isnan(geneMatrix)));
+geneMatrix(:, nanCols) = [];
+
 columnNames  =  X.Properties.VariableNames;
 geneNames  =  columnNames(2:end);   %Gene names
+geneNames(nanCols)=[];
 
 %Predictive weights; Response variable
-weight_dir =(['D:\OneDrive\Haufe_weights_v3']) ;
+weight_dir =(['D:\OneDrive\GraduateStudent_Phd1\AA_WA_2nd\output\Haufe_weights_v3']) ;
 weight=load([weight_dir '\weights_full_cov_X_MEAN.mat']);
 Y = weight.cov_avg; 
 
@@ -28,21 +32,7 @@ Y = zscore(Y);     % Response variable
 %typically top 2 or 3 components will explain a large part of the variance
 %(hopefully!)
 [XL,YL,XS,YS,BETA,PCTVAR,MSE,stats]=plsregress(X,Y);
-dim=15;
-
-plot(1:dim,cumsum(100*PCTVAR(2,1:dim)),'-o','LineWidth',1.5,'Color',[140/255,0,0]);
-set(gca,'Fontsize',14)
-xlabel('Number of PLS components','FontSize',14);
-ylabel('Percent Variance Explained in Y','FontSize',14);
-grid on
-
-%%% plot correlation of PLS component 1 with t-statistic:
-figure
-plot(XS(:,1),weight.cov_avg,'r.')
-[R,p]=corr(XS(:,1),weight.cov_avg) 
-xlabel('XS scores for PLS component 1','FontSize',14);
-ylabel('t-statistic','FontSize',14);
-grid on
+dim=2;
 
 %% Step2: permutation testing to assess significance of PLS result as a function of
 % the number of components (dim) included
@@ -66,14 +56,9 @@ for dim=1:10
     R(dim)=Rsquared
     p(dim)=length(find(Rsq>=Rsquared))/rep
 end
-figure
-plot(1:dim, p,'ok','MarkerSize',8,'MarkerFaceColor','r');
-xlabel('Number of PLS components','FontSize',14);
-ylabel('p-value','FontSize',14);
-grid on
+
 
 %% Step3: bootstrap to get the gene list
-
 genes=geneNames; % this needs to be imported first
 geneindex=1:length(genes);
 
@@ -155,7 +140,7 @@ geneindex2=geneindex2(ind2);
 % print out results
 % later use first column of these csv files for pasting into GOrilla (for
 % bootstrapped ordered list of genes) 
-fid1 = fopen('PLS1_geneWeights.csv','w')
+fid1 = fopen('PLS1_geneWeights_ds01.csv','w')
 for i=1:length(genes)
   fprintf(fid1,'%s, %d, %f\n', PLS1{i}, geneindex1(i), Z1(i));
 end
